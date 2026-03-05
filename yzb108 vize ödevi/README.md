@@ -1,46 +1,41 @@
-1. Giriş
-Bu rapor, soyut sınıflar (abstract classes) ve kalıtım (inheritance) kullanılarak Python programlama dili ile nesne yönelimli (OOP) bir araba modeli oluşturulmasını açıklamaktadır.
+#  Vehicle Management & Efficiency Simulation
 
-2. Sınıf Tasarımı
-Temel Soyut Sınıf: Vehicle (Araç)
-●	Korumalı (protected) nitelikler içerir: _brand, _model, _year.
+Bu proje, Python'da **Soyut Sınıflar (Abstract Classes)**, **Kalıtım (Inheritance)** ve **Kapsülleme (Encapsulation)** gibi ileri düzey Nesne Yönelimli Programlama (OOP) kavramlarını uygulamalı olarak gösteren bir simülasyon sistemidir.
 
-●	Marka (brand) özelliğine erişim sağlayan bir @property metodu içerir.
+Proje kapsamında bir aracın sürüş mesafesi, yakıt tüketimi ve verimlilik hesaplamaları modellenmiştir.
 
-●	show_info() adında soyut bir metot tanımlar. Bu metot alt sınıflarda uygulanır.
+## OOP Mimari Yapısı
 
-Türetilmiş Sınıf: Car (Araba)
-●	Vehicle sınıfından türetilmiştir.
+Sistem, sürdürülebilir ve geliştirilebilir bir yapı için hiyerarşik bir sınıf tasarımı kullanır:
 
-●	Ek özellikler içerir: fuel_type, kilometers, fuel_consumed.
+### 1. Temel Soyut Sınıf: `Vehicle`
+Tüm araç tipleri için ortak bir şablon sunar.
+* **Protected Attributes:** `_brand`, `_model`, `_year` nitelikleri ile veri gizliliği sağlanır.
+* **Property Decorator:** Marka (`brand`) bilgisine kontrollü erişim sağlar.
+* **Abstract Method:** `show_info()` metodu ile alt sınıfların kendi bilgilerini yazdırmasını zorunlu kılar.
 
-●	Arabayı sürmek (drive), yakıt doldurmak (refuel) ve yakıt verimliliğini hesaplamak (fuel_efficiency) gibi işlevler sunar.
+### 2. Türetilmiş Sınıf: `Car`
+`Vehicle` sınıfından miras alarak otomobillere özgü yetenekler kazanır.
+* **Ek Özellikler:** Yakıt türü, toplam kilometre ve harcanan yakıt miktarı.
+* **Fonksiyonel Metotlar:**
+    * `drive(km)`: Kilometre sayacını günceller.
+    * `refuel(liters)`: Yakıt tüketim kaydı tutar.
+    * `fuel_efficiency()`: Aracın yakıt verimliliğini (km/l) hesaplar.
 
-●	show_info() metodu ile araç bilgilerini ekrana yazdırır.
+---
 
 
-3. Simülasyon Örneği – Tesla Model 3
-Aşağıda bir Car nesnesi oluşturularak, Tesla Model 3 aracının sürülmesi ve yakıt verimliliği simüle edilmiştir:
+
+## Kullanım Örneği
+
+Aşağıdaki kod bloğu, sistemin bir **Tesla Model 3** üzerindeki simülasyonunu temsil eder:
+
+```python
+# Nesne oluşturma
 tesla = Car("Tesla", "Model 3", 2022, "Electric")
-tesla.drive(150)
-tesla.refuel(30)
-tesla.show_info()
-print(tesla.fuel_efficiency())
 
-
-
-4. Çıktı
-
-Tesla drove 150 km. Total: 150 km.  
-Tesla refueled 30 liters. Total fuel: 30 L.  
-Brand: Tesla  
-Model: Model 3  
-Year: 2022  
-Fuel Type: Electric  
-Kilometers: 150  
-Fuel Consumed: 30 L  
-Fuel efficiency: 5.00 km/l  
-
-
-Bu çıktılar, sınıf yapılarının başarılı bir şekilde çalıştığını ve nesne yönelimli programlamanın gerçek dünya nesnelerini modellemek için nasıl kullanılabileceğini göstermektedir.
-
+# Simülasyon adımları
+tesla.drive(150)        # 150 km sürüş
+tesla.refuel(30)       # 30 birim enerji/yakıt tüketimi
+tesla.show_info()      # Araç bilgilerini yazdır
+print(f"Efficiency: {tesla.fuel_efficiency()} km/l")
